@@ -1,5 +1,5 @@
-from Classes.Customer import Customer
-from Classes.Hotel import Hotel
+from classes.customer import Customer
+from classes.hotel import Hotel
 import hotel_data
 import datetime
 
@@ -42,7 +42,10 @@ for name in booking_class:
     if input_room_type_number == name[0]:
         choose_room_type = name[1]
 
-hotel.make_reservation(customer, booking_class=f'{choose_room_type}', date="2019 10 12")
+print("Enter user coming data in format 'YYYY MM DD' ")
+user_coming_data = input()
+
+hotel.make_reservation(customer, booking_class=f'{choose_room_type}', date=f"{user_coming_data}")
 customer.customer_data()
 customer.save_customer_data()
 print(customer.upload_customer_data())

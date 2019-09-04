@@ -1,4 +1,4 @@
-from .Bookable import Bookable
+from .bookable import Bookable
 
 
 class Hotel(Bookable):
