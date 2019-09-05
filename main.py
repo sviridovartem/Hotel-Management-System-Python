@@ -3,7 +3,7 @@ from classes.hotel import Hotel
 import hotel_data
 
 
-class MyError(Exception):
+class InputExeptionError(Exception):
     def __init__(self, text, num):
         self.txt = text
         self.n = num
@@ -32,11 +32,11 @@ while True:
     try:
         input_hotel_number = int(input())
         if input_hotel_number > len(hotel_for_choose) or input_hotel_number <= 0:
-            raise MyError("We dont have such hotel", input_hotel_number)
+            raise InputExeptionError("We dont have such hotel", input_hotel_number)
 
     except ValueError:
         print('Not a number')
-    except MyError as mr:
+    except InputExeptionError as mr:
         print(f"{mr.args[0]}, {mr.args[1]}")
 
     else:
@@ -56,11 +56,11 @@ while True:
     try:
         input_room_type_number = int(input())
         if input_room_type_number > len(booking_class) or input_room_type_number <= 0:
-            raise MyError("We dont have such room type", input_room_type_number)
+            raise InputExeptionError("We dont have such room type", input_room_type_number)
 
     except ValueError:
         print('Not a number')
-    except MyError as mr:
+    except InputExeptionError as mr:
         print(f"{mr.args[0]}, {mr.args[1]}")
 
     else:
@@ -75,18 +75,18 @@ while True:
     try:
         user_coming_data = input()
         if len(user_coming_data) != 10:
-            raise MyError("Wrong data format", user_coming_data)
+            raise InputExeptionError("Wrong data format", user_coming_data)
         temp_data = [int(i) for i in user_coming_data.split(" ")]
 
         if temp_data[0] < 2019 or temp_data[0] > 2100:
-            raise MyError("Wrong data format", user_coming_data)
+            raise InputExeptionError("Wrong data format", user_coming_data)
         if temp_data[1] < 0 or temp_data[1] > 12:
-            raise MyError("Wrong data format", user_coming_data)
+            raise InputExeptionError("Wrong data format", user_coming_data)
         if temp_data[2] < 0 or temp_data[2] > 12:
-            raise MyError("Wrong data format", user_coming_data)
+            raise InputExeptionError("Wrong data format", user_coming_data)
     except ValueError:
         print("Not a data")
-    except MyError as mr:
+    except InputExeptionError as mr:
         print(f"{mr.args[0]}, {mr.args[1]}")
     else:
         break
