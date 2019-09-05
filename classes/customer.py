@@ -64,4 +64,23 @@ class Customer:
             json.dump(config, f)
 
     def get_order_summary(self):
-        ...
+        total_price = 0
+        order_list = []
+        with open(r"./saved_data/user_data.json", 'r') as f:
+            config = json.load(f)
+            for book in config["booking"]:
+                for k, v in book.items():
+                    if v['Name'] == f"{self.first_name} {self.last_name}":
+                        total_price += int(v['Wallet'])
+                        order_list.append(v['Booking'])
+
+        print(f""" 
+        ___________Total Order___________
+        Name: {self.first_name} {self.last_name}    
+        Total price: {total_price}
+        Orders:
+        """)
+        for order in order_list:
+            for element in order:
+                print(f"{element[0]} - {element[1]}")
+            print("_________")
