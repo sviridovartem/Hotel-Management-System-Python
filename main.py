@@ -1,15 +1,10 @@
 from classes.customer import Customer
 from classes.hotel import Hotel
+from classes.input_exeption import InputExceptionError
 import hotel_data
 
-
-class InputExeptionError(Exception):
-    def __init__(self, text, num):
-        self.txt = text
-        self.n = num
-
-
 hotel_list = hotel_data.upload_hotel_data()
+#hotel_list = hotel_data.upload_hotel_data_json()
 
 hotel_for_choose = []
 i = 1
@@ -32,11 +27,11 @@ while True:
     try:
         input_hotel_number = int(input())
         if input_hotel_number > len(hotel_for_choose) or input_hotel_number <= 0:
-            raise InputExeptionError("We dont have such hotel", input_hotel_number)
+            raise InputExceptionError("We dont have such hotel", input_hotel_number)
 
     except ValueError:
         print('Not a number')
-    except InputExeptionError as mr:
+    except InputExceptionError as mr:
         print(f"{mr.args[0]}, {mr.args[1]}")
 
     else:
@@ -56,11 +51,11 @@ while True:
     try:
         input_room_type_number = int(input())
         if input_room_type_number > len(booking_class) or input_room_type_number <= 0:
-            raise InputExeptionError("We dont have such room type", input_room_type_number)
+            raise InputExceptionError("We dont have such room type", input_room_type_number)
 
     except ValueError:
         print('Not a number')
-    except InputExeptionError as mr:
+    except InputExceptionError as mr:
         print(f"{mr.args[0]}, {mr.args[1]}")
 
     else:
@@ -75,18 +70,18 @@ while True:
     try:
         user_coming_data = input()
         if len(user_coming_data) != 10:
-            raise InputExeptionError("Wrong data format", user_coming_data)
+            raise InputExceptionError("Wrong data format", user_coming_data)
         temp_data = [int(i) for i in user_coming_data.split(" ")]
 
         if temp_data[0] < 2019 or temp_data[0] > 2100:
-            raise InputExeptionError("Wrong data format", user_coming_data)
+            raise InputExceptionError("Wrong data format", user_coming_data)
         if temp_data[1] < 0 or temp_data[1] > 12:
-            raise InputExeptionError("Wrong data format", user_coming_data)
+            raise InputExceptionError("Wrong data format", user_coming_data)
         if temp_data[2] < 0 or temp_data[2] > 12:
-            raise InputExeptionError("Wrong data format", user_coming_data)
+            raise InputExceptionError("Wrong data format", user_coming_data)
     except ValueError:
         print("Not a data")
-    except InputExeptionError as mr:
+    except InputExceptionError as mr:
         print(f"{mr.args[0]}, {mr.args[1]}")
     else:
         break
@@ -94,4 +89,7 @@ while True:
 hotel.make_reservation(customer, booking_class=f'{choose_room_type}', date=f"{user_coming_data}")
 customer.show_customer_booked_item()
 customer.save_customer_data()
+customer.save_customer_data_json()
+customer.delete_customer_data_json()
+
 print(customer.upload_customer_data())
